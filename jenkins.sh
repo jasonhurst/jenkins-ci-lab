@@ -1,12 +1,14 @@
 #!/bin/bash
-sudo cp /vagrant/hostnames/hosts /etc/hosts
-if [[ "$(ping -c 1 ca.cie.unclass.mil > /dev/null ; echo $?)" == 0 ]];
-then
-    sudo curl -o /etc/pki/ca-trust/source/anchors/myCA.pem --insecure --user vagrant:vagrant scp://ca.cie.unclass.mil/home/vagrant/myCA.pem
-    sudo update-ca-trust extract
-fi
 sudo yum -y install java-1.8.0-openjdk
-sudo wget -q --user "${USERNAME}" --password "${PASSWORD}" https://nexus.di2e.net/nexus/content/repositories/Private_AFDCGSCICD_Releases/content/repositories/Releases/CIE/jenkins/jenkins-2.156-1.1.noarch.rpm
-sudo rpm -i jenkins-2.156-1.1.noarch.rpm
-sudo yum install jenkins
+sudo yum install -y java-1.8.0-openjdk-devel
+sudo yum install -y git
+sudo yum install -y yum-utils   device-mapper-persistent-data   lvm2
+sudo yum-config-manager     --add-repo     https://download.docker.com/linux/centos/docker-ce.repo
+sudo yum install -y docker-ce docker-ce-cli containerd.io
+sudo yum install -y maven
+sudo systemctl start docker
+curl --silent --location http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo | sudo tee /etc/yum.repos.d/jenkins.repo
+sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+sudo yum install -y jenkins-2.150.2-1.1
 sudo systemctl start jenkins
+sudo usermod -aG docker jenkins
