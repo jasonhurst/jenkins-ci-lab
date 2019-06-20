@@ -6,6 +6,7 @@ sudo yum install -y yum-utils   device-mapper-persistent-data   lvm2
 sudo yum-config-manager     --add-repo     https://download.docker.com/linux/centos/docker-ce.repo
 sudo yum install -y docker-ce docker-ce-cli containerd.io
 sudo yum install -y maven
+sudo systemctl enable docker
 sudo systemctl start docker
 curl --silent --location http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo | sudo tee /etc/yum.repos.d/jenkins.repo
 sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
