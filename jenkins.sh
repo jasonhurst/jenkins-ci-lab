@@ -13,3 +13,4 @@ sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
 sudo yum install -y jenkins-2.150.2-1.1
 sudo systemctl start jenkins
 sudo usermod -aG docker jenkins
+sudo reboot
