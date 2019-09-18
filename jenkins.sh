@@ -10,7 +10,7 @@ sudo systemctl enable docker
 sudo systemctl start docker
 curl --silent --location http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo | sudo tee /etc/yum.repos.d/jenkins.repo
 sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
-sudo yum install -y jenkins-2.150.2-1.1
+sudo yum install -y jenkins
 sudo systemctl start jenkins
 sudo usermod -aG docker jenkins
 sudo reboot
